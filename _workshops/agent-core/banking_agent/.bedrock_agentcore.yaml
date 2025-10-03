@@ -1,0 +1,38 @@
+default_agent: ac_bank_agent
+agents:
+  ac_bank_agent:
+    name: ac_bank_agent
+    entrypoint: D:/_GITHUB/amazon-nova-samples/_workshops/agent-core/banking_agent/banking_agent.py
+    platform: linux/arm64
+    container_runtime: none
+    aws:
+      execution_role: arn:aws:iam::928738046450:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-74bb6e93ef
+      execution_role_auto_create: false
+      account: '928738046450'
+      region: us-east-1
+      ecr_repository: 928738046450.dkr.ecr.us-east-1.amazonaws.com/bedrock-agentcore-ac_bank_agent
+      ecr_auto_create: false
+      network_configuration:
+        network_mode: PUBLIC
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+    bedrock_agentcore:
+      agent_id: ac_bank_agent-SbY6TTDof8
+      agent_arn: arn:aws:bedrock-agentcore:us-east-1:928738046450:runtime/ac_bank_agent-SbY6TTDof8
+      agent_session_id: null
+    codebuild:
+      project_name: bedrock-agentcore-ac_bank_agent-builder
+      execution_role: arn:aws:iam::928738046450:role/AmazonBedrockAgentCoreSDKCodeBuild-us-east-1-74bb6e93ef
+      source_bucket: bedrock-agentcore-codebuild-sources-928738046450-us-east-1
+    memory:
+      mode: STM_ONLY
+      memory_id: ac_bank_agent_mem-MVXRZd4uwa
+      memory_arn: arn:aws:bedrock-agentcore:us-east-1:928738046450:memory/ac_bank_agent_mem-MVXRZd4uwa
+      memory_name: ac_bank_agent_mem
+      event_expiry_days: 30
+      first_invoke_memory_check_done: false
+    authorizer_configuration: null
+    request_header_configuration: null
+    oauth_configuration: null
